@@ -1,0 +1,46 @@
+plugins {
+    id 'fabric-loom' version '1.16.2'
+}
+
+version = project.mod_version
+group = 'dev.redener_ben'
+base { archivesName = 'crystaloptmizer' }
+
+repositories {
+    exclusiveContent {
+        forRepository { maven { url = 'https://api.modrinth.com/maven' } }
+        filter { includeGroup 'maven.modrinth' }
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings loom.officialMojangMappings()
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_api_version}"
+
+    // Cloth Config wird in die Mod eingebettet (Jar-in-Jar)
+    modImplementation("maven.modrinth:cloth-config:${project.cloth_config_version}") {
+        exclude group: 'net.fabricmc.fabric-api'
+    }
+    include "maven.modrinth:cloth-config:${project.cloth_config_version}"
+
+    // Mod Menu ist optional
+    modCompileOnly "maven.modrinth:modmenu:${project.modmenu_version}"
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('fabric.mod.json') { expand 'version': project.version }
+}
+
+jar {
+    from('LICENSE') { rename { "LICENSE_${base.archivesName.get()}" } }
+}
+
+tasks.withType(JavaCompile).configureEach { it.options.release = 21 }
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}

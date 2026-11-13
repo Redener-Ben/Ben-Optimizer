@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "id": "crystaloptmizer",
+  "version": "${version}",
+  "name": "Crystal & Anchor Optimizer",
+  "description": "Client-side PvP optimizer: end crystals and exploded respawn anchors disappear instantly on your side, so you do not wait for the server.",
+  "authors": ["redener_ben"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/crystaloptmizer/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": ["dev.redener_ben.crystaloptimizer.client.CrystaloptmizerClient"],
+    "modmenu": ["dev.redener_ben.crystaloptimizer.client.config.ModMenuIntegration"]
+  },
+  "mixins": ["crystaloptmizer.mixins.json"],
+  "depends": {
+    "fabricloader": ">=0.19.2",
+    "fabric-api": "*",
+    "minecraft": "1.21.11",
+    "cloth-config": ">=21.11.0"
+  },
+  "suggests": {
+    "modmenu": "*"
+  }
+}
