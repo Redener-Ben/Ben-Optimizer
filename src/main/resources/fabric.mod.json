@@ -1,19 +1,19 @@
 {
   "schemaVersion": 1,
-  "id": "crystaloptmizer",
+  "id": "benoptimizer",
   "version": "${version}",
-  "name": "Crystal & Anchor Optimizer",
+  "name": "Ben Optimizer",
   "description": "Client-side PvP optimizer: end crystals and exploded respawn anchors disappear instantly on your side, so you do not wait for the server.",
-  "authors": ["redener_ben"],
+  "authors": ["Redener_ben"],
   "contact": {},
   "license": "MIT",
-  "icon": "assets/crystaloptmizer/icon.png",
+  "icon": "assets/benoptimizer/icon.png",
   "environment": "client",
   "entrypoints": {
-    "client": ["dev.redener_ben.crystaloptimizer.client.CrystaloptmizerClient"],
-    "modmenu": ["dev.redener_ben.crystaloptimizer.client.config.ModMenuIntegration"]
+    "client": ["dev.redener_ben.benoptimizer.client.BenOptimizerClient"],
+    "modmenu": ["dev.redener_ben.benoptimizer.client.config.ModMenuIntegration"]
   },
-  "mixins": ["crystaloptmizer.mixins.json"],
+  "mixins": ["benoptimizer.mixins.json"],
   "depends": {
     "fabricloader": ">=0.19.2",
     "fabric-api": "*",

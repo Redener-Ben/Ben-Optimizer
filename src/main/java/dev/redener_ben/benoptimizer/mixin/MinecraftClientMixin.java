@@ -1,6 +1,6 @@
-package dev.redener_ben.crystaloptimizer.mixin;
+package dev.redener_ben.benoptimizer.mixin;
 
-import dev.redener_ben.crystaloptimizer.client.config.CrystalOptimizerConfig;
+import dev.redener_ben.benoptimizer.client.config.BenOptimizerConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.LocalPlayer;
 import net.minecraft.world.entity.Entity;
@@ -23,25 +23,25 @@ public class MinecraftClientMixin {
     @Shadow private int rightClickDelay;
     @Shadow protected int missTime;
 
-    @Unique private long crystaloptimizer$lastCrystalAttackTime = 0L;
+    @Unique private long benoptimizer$lastCrystalAttackTime = 0L;
 
     @Unique
-    private boolean crystaloptimizer$holdingCrystal() {
+    private boolean benoptimizer$holdingCrystal() {
         return this.player != null
                 && (this.player.getMainHandItem().is(Items.END_CRYSTAL) || this.player.getOffhandItem().is(Items.END_CRYSTAL));
     }
 
     @Inject(method = "startAttack", at = @At("HEAD"), cancellable = true)
-    private void crystaloptimizer$onDoAttack(CallbackInfoReturnable<Boolean> cir) {
+    private void benoptimizer$onDoAttack(CallbackInfoReturnable<Boolean> cir) {
         if (this.hitResult != null && this.hitResult.getType() == HitResult.Type.ENTITY) {
             Entity entity = ((EntityHitResult) this.hitResult).getEntity();
             if (entity instanceof EndCrystal) {
                 long now = System.currentTimeMillis();
-                if (now - this.crystaloptimizer$lastCrystalAttackTime < CrystalOptimizerConfig.getInstance().crystalHitDelayMs) {
+                if (now - this.benoptimizer$lastCrystalAttackTime < BenOptimizerConfig.getInstance().crystalHitDelayMs) {
                     cir.setReturnValue(false);
                     return;
                 }
-                this.crystaloptimizer$lastCrystalAttackTime = now;
+                this.benoptimizer$lastCrystalAttackTime = now;
                 this.missTime = 0;
             }
         }
@@ -49,15 +49,15 @@ public class MinecraftClientMixin {
 
     // Nur End Crystals bekommen Fast Place. Glowstone behaelt absichtlich die normale Verzoegerung.
     @Inject(method = "startUseItem", at = @At("RETURN"))
-    private void crystaloptimizer$onDoItemUse(CallbackInfo ci) {
-        if (CrystalOptimizerConfig.getInstance().fastPlace && this.crystaloptimizer$holdingCrystal()) {
+    private void benoptimizer$onDoItemUse(CallbackInfo ci) {
+        if (BenOptimizerConfig.getInstance().fastPlace && this.benoptimizer$holdingCrystal()) {
             this.rightClickDelay = 0;
         }
     }
 
     @Inject(method = "tick", at = @At("HEAD"))
-    private void crystaloptimizer$onTick(CallbackInfo ci) {
-        if (CrystalOptimizerConfig.getInstance().fastPlace && this.crystaloptimizer$holdingCrystal()) {
+    private void benoptimizer$onTick(CallbackInfo ci) {
+        if (BenOptimizerConfig.getInstance().fastPlace && this.benoptimizer$holdingCrystal()) {
             this.rightClickDelay = 0;
         }
         if (this.hitResult != null && this.hitResult.getType() == HitResult.Type.ENTITY

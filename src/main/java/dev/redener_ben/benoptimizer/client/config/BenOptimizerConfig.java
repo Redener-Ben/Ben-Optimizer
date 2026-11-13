@@ -1,4 +1,4 @@
-package dev.redener_ben.crystaloptimizer.client.config;
+package dev.redener_ben.benoptimizer.client.config;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -8,20 +8,20 @@ import java.io.FileWriter;
 import java.io.IOException;
 import net.fabricmc.loader.api.FabricLoader;
 
-public class CrystalOptimizerConfig {
+public class BenOptimizerConfig {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
-    private static final File CONFIG_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(), "crystaloptimizer.json");
+    private static final File CONFIG_FILE = new File(FabricLoader.getInstance().getConfigDir().toFile(), "benoptimizer.json");
 
     public int crystalHitDelayMs = 50;
     public boolean fastPlace = true;
     /** Entfernt explodierte Respawn Anchors sofort auf dem Client. Glowstone bleibt normal. */
     public boolean anchorOptimizer = true;
 
-    private static CrystalOptimizerConfig instance;
+    private static BenOptimizerConfig instance;
 
-    public static CrystalOptimizerConfig getInstance() {
+    public static BenOptimizerConfig getInstance() {
         if (instance == null) {
-            instance = new CrystalOptimizerConfig();
+            instance = new BenOptimizerConfig();
             instance.load();
         }
         return instance;
@@ -30,7 +30,7 @@ public class CrystalOptimizerConfig {
     public void load() {
         if (CONFIG_FILE.exists()) {
             try (FileReader reader = new FileReader(CONFIG_FILE)) {
-                CrystalOptimizerConfig loaded = GSON.fromJson(reader, CrystalOptimizerConfig.class);
+                BenOptimizerConfig loaded = GSON.fromJson(reader, BenOptimizerConfig.class);
                 if (loaded != null) {
                     this.crystalHitDelayMs = loaded.crystalHitDelayMs;
                     this.fastPlace = loaded.fastPlace;

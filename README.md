@@ -14,7 +14,7 @@ A small **client-side** Fabric mod for Minecraft **1.21.11** that removes the wa
 - **Glowstone is not touched:** charging anchors works exactly like vanilla.
 
 ## Config
-In-game via **Mod Menu**, or in `config/crystaloptimizer.json`:
+In-game via **Mod Menu**, or in `config/benoptimizer.json`:
 
 | Option | Default |
 |---|---|
@@ -38,4 +38,4 @@ Requires Java 21.
 The mod JAR is written to `build/libs/`.
 
 ## License
-[MIT](LICENSE) © redener_ben. Bundles [Cloth Config](https://github.com/shedaniel/ClothConfig) (LGPL-3.0) by shedaniel.
+[MIT](LICENSE) © Redener_ben. Bundles [Cloth Config](https://github.com/shedaniel/ClothConfig) (LGPL-3.0) by shedaniel.

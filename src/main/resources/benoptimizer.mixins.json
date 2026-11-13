@@ -1,7 +1,7 @@
 {
   "required": true,
   "minVersion": "0.8",
-  "package": "dev.redener_ben.crystaloptimizer.mixin",
+  "package": "dev.redener_ben.benoptimizer.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
     "ClientPlayerInteractionManagerMixin",

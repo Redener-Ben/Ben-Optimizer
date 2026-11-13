@@ -1,6 +1,6 @@
-package dev.redener_ben.crystaloptimizer.mixin;
+package dev.redener_ben.benoptimizer.mixin;
 
-import dev.redener_ben.crystaloptimizer.client.config.CrystalOptimizerConfig;
+import dev.redener_ben.benoptimizer.client.config.BenOptimizerConfig;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.multiplayer.ClientLevel;
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
@@ -30,13 +30,13 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
  */
 @Mixin(MultiPlayerGameMode.class)
 public class AnchorOptimizerMixin {
-    @Unique private BlockPos crystaloptimizer$anchorPos;
+    @Unique private BlockPos benoptimizer$anchorPos;
 
     @Inject(method = "useItemOn", at = @At("HEAD"))
-    private void crystaloptimizer$beforeUse(LocalPlayer player, InteractionHand hand, BlockHitResult hit,
+    private void benoptimizer$beforeUse(LocalPlayer player, InteractionHand hand, BlockHitResult hit,
                                              CallbackInfoReturnable<InteractionResult> cir) {
-        this.crystaloptimizer$anchorPos = null;
-        if (!CrystalOptimizerConfig.getInstance().anchorOptimizer) return;
+        this.benoptimizer$anchorPos = null;
+        if (!BenOptimizerConfig.getInstance().anchorOptimizer) return;
 
         ClientLevel level = Minecraft.getInstance().level;
         if (level == null || level.dimension() == Level.NETHER) return; // Im Nether explodiert er nicht
@@ -54,14 +54,14 @@ public class AnchorOptimizerMixin {
         boolean glowInOffhand = player.getOffhandItem().is(Items.GLOWSTONE);
         if (canCharge && (glowInHand || (hand == InteractionHand.MAIN_HAND && glowInOffhand))) return;
 
-        this.crystaloptimizer$anchorPos = pos.immutable();
+        this.benoptimizer$anchorPos = pos.immutable();
     }
 
     @Inject(method = "useItemOn", at = @At("RETURN"))
-    private void crystaloptimizer$afterUse(LocalPlayer player, InteractionHand hand, BlockHitResult hit,
+    private void benoptimizer$afterUse(LocalPlayer player, InteractionHand hand, BlockHitResult hit,
                                             CallbackInfoReturnable<InteractionResult> cir) {
-        BlockPos pos = this.crystaloptimizer$anchorPos;
-        this.crystaloptimizer$anchorPos = null;
+        BlockPos pos = this.benoptimizer$anchorPos;
+        this.benoptimizer$anchorPos = null;
         if (pos == null || !cir.getReturnValue().consumesAction()) return;
 
         ClientLevel level = Minecraft.getInstance().level;

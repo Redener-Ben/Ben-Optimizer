@@ -1,4 +1,4 @@
-package dev.redener_ben.crystaloptimizer.client.config;
+package dev.redener_ben.benoptimizer.client.config;
 
 import com.terraformersmc.modmenu.api.ConfigScreenFactory;
 import com.terraformersmc.modmenu.api.ModMenuApi;
@@ -11,10 +11,10 @@ public class ModMenuIntegration implements ModMenuApi {
     @Override
     public ConfigScreenFactory<?> getModConfigScreenFactory() {
         return parent -> {
-            CrystalOptimizerConfig config = CrystalOptimizerConfig.getInstance();
+            BenOptimizerConfig config = BenOptimizerConfig.getInstance();
             ConfigBuilder builder = ConfigBuilder.create()
                     .setParentScreen(parent)
-                    .setTitle(Component.literal("Crystal & Anchor Optimizer"));
+                    .setTitle(Component.literal("Ben Optimizer"));
             builder.setSavingRunnable(config::save);
 
             ConfigCategory general = builder.getOrCreateCategory(Component.literal("General"));

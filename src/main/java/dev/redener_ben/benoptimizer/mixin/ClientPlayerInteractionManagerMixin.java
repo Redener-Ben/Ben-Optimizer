@@ -1,4 +1,4 @@
-package dev.redener_ben.crystaloptimizer.mixin;
+package dev.redener_ben.benoptimizer.mixin;
 
 import net.minecraft.client.multiplayer.MultiPlayerGameMode;
 import net.minecraft.world.entity.Entity;
@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(MultiPlayerGameMode.class)
 public class ClientPlayerInteractionManagerMixin {
     @Inject(method = "attack", at = @At("HEAD"))
-    private void crystaloptimizer$onAttackEntity(Player player, Entity target, CallbackInfo ci) {
+    private void benoptimizer$onAttackEntity(Player player, Entity target, CallbackInfo ci) {
         if (target instanceof EndCrystal) {
             target.setRemoved(Entity.RemovalReason.KILLED);
             target.onClientRemoval();

@@ -4,7 +4,7 @@ plugins {
 
 version = project.mod_version
 group = 'dev.redener_ben'
-base { archivesName = 'crystaloptmizer' }
+base { archivesName = 'ben-optimizer' }
 
 repositories {
     exclusiveContent {
